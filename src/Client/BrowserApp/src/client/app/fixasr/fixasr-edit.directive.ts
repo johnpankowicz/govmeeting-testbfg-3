@@ -2,10 +2,10 @@ import { Directive, ElementRef, Input, Output, EventEmitter } from '@angular/cor
 import { HostListener } from '@angular/core';
 
 @Directive({
-    selector:'[myhighlight]',
+    selector:'[gm-fixasr-edit]',
 })
 
-export class MyHighlightDirective {
+export class FixasrEditDirective {
 
     //@Input('myHighlight') highlightColor: string;
     @Input() highlightColor: string;
@@ -24,6 +24,7 @@ export class MyHighlightDirective {
         this._el = el.nativeElement;
     }
 
+    /*
     @HostListener('mouseenter')
     onMouseEnter() {
         // console.log('onMouseEnter');
@@ -35,6 +36,7 @@ export class MyHighlightDirective {
         // console.log('onMouseLeave');
         this._highlight('transparent');
     }
+    */
 
     @HostListener('mouseup')
     onMouseUp() {
@@ -80,10 +82,13 @@ export class MyHighlightDirective {
 
         var start = selection.range.startOffset;
         var end = selection.range.endOffset;
-        // console.log('start=' + start);
-        // console.log('end=' + end);
-        // If start = end, then they just clicked and didn't select.
-        if (start === end) return;
+        console.log('start=' + start);
+        console.log('end=' + end);
+
+
+        if (start == end) return;  //test
+        // If start != end, then they selected text, just return.
+        //if (start !== end) return;
 
         end = end -1; // last character selected is one less.
 
