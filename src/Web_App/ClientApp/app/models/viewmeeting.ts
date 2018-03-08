@@ -1,5 +1,5 @@
 ﻿//import { WorkItem } from './workitem';
-import { Meeting } from '../models/meeting'
+import { Meeting } from './meeting'
 //import { Volunteer } from './volunteer';
 //import { Location } from '../models/location';
 
