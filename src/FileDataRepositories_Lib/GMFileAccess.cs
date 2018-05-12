@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GM.FileDataRepositories
 {
-    public static class FileAccess
+    public static class GMFileAccess
     {
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
@@ -30,15 +30,25 @@ namespace GM.FileDataRepositories
             }
         }
 
-        public static void CopyDirectories(string sourceDirectory, string targetDirectory)
+        // Example: CopyDirectory(@"C:\tmp\X", @"D\tmp"); will copy X to D:\tmp\X.
+        public static void CopyDirectory(string sourceDirectory, string targetDirectory)
+        {
+            DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
+            string destination = targetDirectory + "\\" + diSource.Name;
+            Directory.CreateDirectory(destination);
+            CopyContents(sourceDirectory, destination);
+        }
+
+        // Example: CopyContents(@"C:\tmp\X", @"D\tmp"); will copy the contents of X to D:\tmp.
+        public static void CopyContents(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
             DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
 
-            CopyDirectoryRecursively(diSource, diTarget);
+            CopyContentsRecursively(diSource, diTarget);
         }
 
-        public static void CopyDirectoryRecursively(DirectoryInfo source, DirectoryInfo target)
+        public static void CopyContentsRecursively(DirectoryInfo source, DirectoryInfo target)
         {
             Directory.CreateDirectory(target.FullName);
 
@@ -54,7 +64,7 @@ namespace GM.FileDataRepositories
             {
                 DirectoryInfo nextTargetSubDir =
                     target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyDirectoryRecursively(diSourceSubDir, nextTargetSubDir);
+                CopyContentsRecursively(diSourceSubDir, nextTargetSubDir);
             }
         }
 
@@ -62,7 +72,7 @@ namespace GM.FileDataRepositories
         {
             if (deleteOldFolder)
             {
-                DeleteDirectoryRecursively(folder);
+                DeleteDirectoryAndContents(folder);
             }
             if (Directory.Exists(folder))
             {
@@ -75,22 +85,13 @@ namespace GM.FileDataRepositories
             }
         }
 
-        public static bool DeleteDirectoryRecursively(string folder)
+        public static bool DeleteDirectoryAndContents(string folder)
         {
             if (Directory.Exists(folder))
             {
                 DirectoryInfo di = new DirectoryInfo(folder);
 
-                foreach (FileInfo file in di.GetFiles())
-                {
-                    file.Delete();
-                }
-                foreach (DirectoryInfo dir in di.GetDirectories())
-                {
-                    dir.Delete(true);
-                }
-
-                di.Delete();
+                di.Delete(true);
                 return true;
             }
             else
@@ -106,6 +107,16 @@ namespace GM.FileDataRepositories
                 Directory.Delete(folder, true);
             }
             Directory.CreateDirectory(folder);
+        }
+
+        // Modify the path to be the full path, if it is a relative path.
+        public static string GetFullPath(string path)
+        {
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(Directory.GetCurrentDirectory(), path);
+            }
+            return Path.GetFullPath(path);
         }
 
 
