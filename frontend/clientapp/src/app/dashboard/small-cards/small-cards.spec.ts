@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmallCardComponent } from './small-card';
+import { SmallCardsComponent } from './small-cards';
 
 describe('SmallCardComponent', () => {
-  let component: SmallCardComponent;
-  let fixture: ComponentFixture<SmallCardComponent>;
+  let component: SmallCardsComponent;
+  let fixture: ComponentFixture<SmallCardsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SmallCardComponent ]
-    })
-    .compileComponents();
+      declarations: [SmallCardsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SmallCardComponent);
+    fixture = TestBed.createComponent(SmallCardsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

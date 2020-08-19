@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AppData } from '../../appdata';
 
 import { VideoComponent } from './video';
+
+class MockAppData {
+  openNav() {}
+}
 
 describe('VideoComponent', () => {
   let component: VideoComponent;
@@ -8,9 +14,10 @@ describe('VideoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoComponent],
+      providers: [{ provide: AppData, useClass: MockAppData }],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

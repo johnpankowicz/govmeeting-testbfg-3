@@ -1,4 +1,4 @@
-import { EditTranscript, Talk, Word } from '../../models/edittranscript-view';
+import { EditTranscript, Talk, Word } from '../edittranscript-view';
 export { EditTranscript };
 
 export let EditTranscriptSample: EditTranscript = {

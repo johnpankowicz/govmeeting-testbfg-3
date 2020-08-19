@@ -1,4 +1,4 @@
-import { ViewTranscript } from '../../models/viewtranscript-view';
+import { ViewTranscript } from '../viewtranscript-view';
 export { ViewTranscript };
 
 export let ViewTranscriptSample: ViewTranscript = {

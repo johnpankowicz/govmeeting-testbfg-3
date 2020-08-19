@@ -1,4 +1,4 @@
-import { Addtags, Talk } from '../../models/addtags-view';
+import { Addtags, Talk } from '../addtags-view';
 
 export let addtagsSample: Addtags = {
   sections: [
